@@ -1,22 +1,25 @@
 from pathlib import Path
 
 
-def part_one(lst):
+def part_one(lst, target=2020):
     """Day 1: Report Repair (part 1)"""
+    if len(lst) < 2:
+        return None
+
     first, rest = lst[0], lst[1:]
     for item in rest:
-        if first + item == 2020:
+        if first + item == target:
             return first * item
-    return part_one(rest)
+    return part_one(rest, target)
 
 
 def part_two(lst):
     """Day 1: Report Repair (part 2)"""
     first, rest = lst[0], lst[1:]
-    for idx, i in enumerate(rest):
-        for j in rest[idx:]:
-            if first + i + j == 2020:
-                return first * i * j
+    new_target = 2020 - first
+    match_found = part_one(rest, target=new_target)
+    if match_found:
+        return first * match_found
     return part_two(rest)
 
 
