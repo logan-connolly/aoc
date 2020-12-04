@@ -1,5 +1,6 @@
 from math import ceil, prod
-from pathlib import Path
+
+from data import DATA_FOLDER
 
 
 def part_one(tmap, down, right):
@@ -21,8 +22,7 @@ def part_two(tmap):
 
 
 if __name__ == "__main__":
-    fpath = Path(__file__).parent.parent / "data/day_03.txt"
-    with open(fpath) as f:
+    with open(DATA_FOLDER / "day_03.txt") as f:
         tmap = f.read().splitlines()
         n_copies = ceil(len(tmap) * round((len(tmap) / 4)))
         tmap_dup = [map_row * n_copies for map_row in tmap]

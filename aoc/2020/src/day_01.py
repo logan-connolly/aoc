@@ -1,4 +1,4 @@
-from pathlib import Path
+from data import DATA_FOLDER
 
 
 def part_one(lst, target=2020):
@@ -22,8 +22,7 @@ def part_two(lst):
 
 
 if __name__ == "__main__":
-    fpath = Path(__file__).parent.parent / "data/day_01.txt"
-    with open(fpath) as f:
+    with open(DATA_FOLDER / "day_01.txt") as f:
         nums = [int(n) for n in f.read().splitlines()]
         print(f"Ans 1: {part_one(nums)}")
         print(f"Ans 2: {part_two(nums)}")

@@ -1,4 +1,4 @@
-from pathlib import Path
+from data import DATA_FOLDER
 
 
 def extract_passwd_data(passwd_input):
@@ -24,8 +24,7 @@ def part_two(passwd_input):
 
 
 if __name__ == "__main__":
-    fpath = Path(__file__).parent.parent / "data/day_02.txt"
-    with open(fpath) as f:
+    with open(DATA_FOLDER / "day_02.txt") as f:
         passwds = f.read().splitlines()
         print(f"Ans 1: {sum(part_one(p) for p in passwds)}")
         print(f"Ans 2: {sum(part_two(p) for p in passwds)}")

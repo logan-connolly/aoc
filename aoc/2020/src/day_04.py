@@ -1,5 +1,6 @@
 import re
-from pathlib import Path
+
+from data import DATA_FOLDER
 
 
 def clean_passports(passport_input):
@@ -20,8 +21,7 @@ def validate(pass_dict, full_check=False):
 
     def validate_keys():
         required_keys = {"byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"}
-        pass_keys = set(pass_dict.keys())
-        key_diff = required_keys - pass_keys
+        key_diff = required_keys - set(pass_dict.keys())
         if len(key_diff) > 1:
             return False
         if len(key_diff) == 1:
@@ -79,8 +79,7 @@ def part_two(passport_input):
 
 
 if __name__ == "__main__":
-    fpath = Path(__file__).parent.parent / "data/day_04.txt"
-    with open(fpath) as f:
+    with open(DATA_FOLDER / "day_04.txt") as f:
         passport_input = f.read()
         print(f"Ans 1: {part_one(passport_input)}")
         print(f"Ans 2: {part_two(passport_input)}")
