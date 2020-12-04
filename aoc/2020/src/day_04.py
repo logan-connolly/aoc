@@ -46,8 +46,8 @@ def validate(pass_dict, full_check=False):
     def validate_pid():
         return len(pass_dict["pid"]) == 9
 
-    def validate_range(val, min_val, max_val):
-        return min_val <= int(val) <= max_val
+    def validate_range(key, min_val, max_val):
+        return min_val <= int(pass_dict[key]) <= max_val
 
     if validate_keys():
         if full_check:
@@ -57,9 +57,9 @@ def validate(pass_dict, full_check=False):
                     validate_hcl(),
                     validate_hgt(),
                     validate_pid(),
-                    validate_range(pass_dict["byr"], 1920, 2002),
-                    validate_range(pass_dict["iyr"], 2010, 2020),
-                    validate_range(pass_dict["eyr"], 2020, 2030),
+                    validate_range("byr", 1920, 2002),
+                    validate_range("iyr", 2010, 2020),
+                    validate_range("eyr", 2020, 2030),
                 ]
             )
         return True
