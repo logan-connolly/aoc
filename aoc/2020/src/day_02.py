@@ -1,26 +1,26 @@
 from pathlib import Path
 
 
+def extract_passwd_data(passwd_input):
+    """Helper for formatting input data"""
+    _range, target, passwd = passwd_input.split()
+    indices = [int(n) for n in _range.split("-")]
+    return indices, target.strip(":"), passwd
+
+
 def part_one(passwd_input):
     """Day 2: Password Philosophy (part 1)"""
-    c_range, c_target, passwd = passwd_input.split()
-    c_min, c_max = [int(n) for n in c_range.split("-")]
-    c_target = c_target.strip(":")
-    c_count = sum(c == c_target for c in passwd)
-    if c_count < c_min or c_count > c_max:
-        return False
-    return True
+    indices, target, passwd = extract_passwd_data(passwd_input)
+    char_min, char_max = indices
+    char_count = sum(char == target for char in passwd)
+    return char_min <= char_count <= char_max
 
 
 def part_two(passwd_input):
     """Day 2: Password Philosophy (part 2)"""
-    c_range, c_target, passwd = passwd_input.split()
-    c_idx = [int(n) for n in c_range.split("-")]
-    c_target = c_target.strip(":")
-    c_count = sum(c_target == passwd[idx - 1] for idx in c_idx)
-    if c_count == 1:
-        return True
-    return False
+    indices, target, passwd = extract_passwd_data(passwd_input)
+    char_count = sum(target == passwd[idx - 1] for idx in indices)
+    return char_count == 1
 
 
 if __name__ == "__main__":

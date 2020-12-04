@@ -16,7 +16,7 @@ TMAP = [
 
 
 def test_part_one():
-    assert part_one(TMAP) == 7
+    assert part_one(TMAP, down=1, right=3) == 7
 
 
 def test_part_two():
