@@ -1,20 +1,5 @@
 import re
 
-from data import DATA_FOLDER
-
-
-def clean_passports(passport_input):
-    """Take string input and split into list of passport dictionaries"""
-
-    def extract_data(passport_input):
-        individuals = passport_input.split("\n\n")
-        return [re.sub(r"\n", " ", ind).strip() for ind in individuals]
-
-    def passport_dict(passport):
-        return dict(item.split(":") for item in passport.split())
-
-    return [passport_dict(passport) for passport in extract_data(passport_input)]
-
 
 def validate(pass_dict, full_check=False):
     """Check that not only all fields are present, but that content is valid"""
@@ -64,22 +49,3 @@ def validate(pass_dict, full_check=False):
             )
         return True
     return False
-
-
-def part_one(passport_input):
-    """Day 4: Passport Processing (part 1)"""
-    passports = clean_passports(passport_input)
-    return sum(validate(pass_dict) for pass_dict in passports)
-
-
-def part_two(passport_input):
-    """Day 4: Passport Processing (part 2)"""
-    passports = clean_passports(passport_input)
-    return sum(validate(pass_dict, full_check=True) for pass_dict in passports)
-
-
-if __name__ == "__main__":
-    with open(DATA_FOLDER / "day_04.txt") as f:
-        passport_input = f.read()
-        print(f"Ans 1: {part_one(passport_input)}")
-        print(f"Ans 2: {part_two(passport_input)}")

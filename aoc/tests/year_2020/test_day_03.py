@@ -1,4 +1,4 @@
-from src.day_03 import part_one, part_two
+from aoc.year_2020.day_03 import part_one, part_two
 
 TMAP = [
     "..##.........##.........##.........##.........##.........##.......",
@@ -16,9 +16,9 @@ TMAP = [
 
 
 def test_part_one():
-    assert part_one(TMAP, down=1, right=3) == 7
+    assert part_one.solve(TMAP, down=1, right=3) == 7
 
 
 def test_part_two():
     tmap = [map_row * 2 for map_row in TMAP]
-    assert part_two(tmap) == 336
+    assert part_two.solve(tmap) == 336

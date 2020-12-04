@@ -1,4 +1,4 @@
-from src.day_04 import part_one, part_two
+from aoc.year_2020.day_04 import part_one, part_two
 
 TEST_INPUT = """
 pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
@@ -31,8 +31,8 @@ pid:3556412378 byr:2007
 
 
 def test_part_one():
-    assert part_one(TEST_INPUT) == 8
+    assert part_one.solve(TEST_INPUT) == 8
 
 
 def test_part_two():
-    assert part_two(TEST_INPUT) == 4
+    assert part_two.solve(TEST_INPUT) == 4
