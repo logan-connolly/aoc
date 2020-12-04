@@ -3,14 +3,12 @@ from pathlib import Path
 
 def part_one(lst, target=2020):
     """Day 1: Report Repair (part 1)"""
-    if len(lst) < 2:
-        return None
-
-    first, rest = lst[0], lst[1:]
-    for item in rest:
-        if first + item == target:
-            return first * item
-    return part_one(rest, target)
+    target_set = set()
+    for num in lst:
+        target_set.add(target - num)
+        if num in target_set:
+            return num * (target - num)
+    return None
 
 
 def part_two(lst):
