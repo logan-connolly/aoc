@@ -1,6 +1,13 @@
 # Advent of Code (AoC)
 
-[![Build Status](https://travis-ci.com/logan-connolly/aoc.svg?branch=main)](https://travis-ci.com/logan-connolly/aoc)
+<p>
+<a href="https://travis-ci.com/github/logan-connolly/aoc">
+    <img src="https://travis-ci.com/logan-connolly/aoc.svg?branch=main" alt="Build Status">
+</a>
+<a href="https://codecov.io/gh/logan-connolly/aoc">
+  <img src="https://codecov.io/gh/logan-connolly/aoc/branch/main/graph/badge.svg?token=K8WVXKIDY6"/>
+</a>
+</p>
 
 Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. I chose to use python and to package the solutions into the `aoc` python package.
 
