@@ -16,3 +16,4 @@ install:
 script:
   - pre-commit run --all-files
   - coverage run -m pytest aoc
+  - coverage report
