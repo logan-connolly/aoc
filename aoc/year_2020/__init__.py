@@ -1,10 +1,11 @@
-from . import day_01, day_02, day_03, day_04
+from . import day_01, day_02, day_03, day_04, day_05
 
 solutions = {
     "1": day_01.solution,
     "2": day_02.solution,
     "3": day_03.solution,
     "4": day_04.solution,
+    "5": day_05.solution,
 }
 
 
