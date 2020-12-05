@@ -1,5 +1,5 @@
 def get_seat_id(ticket):
-    # initialize floor plan
+    """Get seat id based on boarding ticket (ie. 'BBFFBBFRLL')"""
     rows = range(128)
     cols = range(8)
 
