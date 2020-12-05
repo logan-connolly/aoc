@@ -2,28 +2,17 @@ language: python
 python: "3.8"
 dist: xenial
 
-stages:
-  - setup
-  - lint
-  - test
-
 cache:
   pip: true
   directories:
     - "$HOME/.cache/pre-commit"
 
-jobs:
-  include:
-    - stage: setup
-      install:
-        - pip install --upgrade pip
-        - pip install poetry
-        - poetry install -v
-    - stage: lint
-      install:
-        - pre-commit install-hooks
-      script:
-        - pre-commit run --all-files
-    - stage: test
-      script:
-        - coverage run -m pytest aoc
+install:
+  - pip install --upgrade pip
+  - pip install poetry
+  - poetry install
+  - pre-commit install-hooks
+
+script:
+  - pre-commit run --all-files
+  - coverage run -m pytest aoc
