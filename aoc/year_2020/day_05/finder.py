@@ -5,7 +5,7 @@ def get_seat_id(ticket):
 
     for letter in ticket:
         if letter in "FB":
-            midpoint = midpoint = len(rows) // 2
+            midpoint = len(rows) // 2
             rows = rows[:midpoint] if letter == "F" else rows[midpoint:]
         else:
             midpoint = len(cols) // 2
