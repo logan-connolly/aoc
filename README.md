@@ -1,4 +1,4 @@
-# 🎄 Advent of Code (AoC)
+# 🎄 Advent of Code (aoc)
 
 [![tests](https://github.com/logan-connolly/aoc/actions/workflows/test.yaml/badge.svg)](https://github.com/logan-connolly/aoc/actions)
 
