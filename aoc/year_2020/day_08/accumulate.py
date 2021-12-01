@@ -1,6 +1,6 @@
 from typing import List, Set, Tuple
 
-from .parse import Cmd
+from aoc.year_2020.day_08.parse import Cmd
 
 Result = Tuple[int, int]
 

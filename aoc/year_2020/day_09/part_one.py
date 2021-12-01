@@ -1,6 +1,6 @@
 from typing import List
 
-from .validate import valid_preamble
+from aoc.year_2020.day_09.validate import valid_preamble
 
 
 def solve(nums: List[int], preamble: int) -> int:

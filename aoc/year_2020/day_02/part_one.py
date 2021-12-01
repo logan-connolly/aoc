@@ -1,4 +1,4 @@
-from .extract import extract_passwd_data
+from aoc.year_2020.day_02.extract import extract_passwd_data
 
 
 def solve(passwds):

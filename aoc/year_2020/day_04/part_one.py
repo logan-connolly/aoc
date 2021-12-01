@@ -1,5 +1,5 @@
-from .cleaner import clean_passports
-from .validator import validate
+from aoc.year_2020.day_04.cleaner import clean_passports
+from aoc.year_2020.day_04.validator import validate
 
 
 def solve(passports):

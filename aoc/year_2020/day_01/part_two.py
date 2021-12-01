@@ -1,4 +1,4 @@
-from . import part_one
+from aoc.year_2020.day_01 import part_one
 
 
 def solve(nums):

@@ -1,4 +1,4 @@
-from .finder import get_seat_id
+from aoc.year_2020.day_05.finder import get_seat_id
 
 
 def solve(tickets):

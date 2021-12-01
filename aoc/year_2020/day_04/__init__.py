@@ -1,7 +1,7 @@
 import re
 
-from ..resources import read_input
-from . import part_one, part_two
+from aoc.year_2020.day_04 import part_one, part_two
+from aoc.year_2020.resources import read_input
 
 
 def solution():

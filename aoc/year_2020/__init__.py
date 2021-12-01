@@ -1,4 +1,4 @@
-from . import day_01, day_02, day_03, day_04, day_05, day_06, day_08, day_09
+from aoc.year_2020 import day_01, day_02, day_03, day_04, day_05, day_06, day_08, day_09
 
 solutions = {
     "1": day_01.solution,

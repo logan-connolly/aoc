@@ -1,5 +1,5 @@
-from .accumulate import loop_accumulate
-from .parse import parse_command
+from aoc.year_2020.day_08.accumulate import loop_accumulate
+from aoc.year_2020.day_08.parse import parse_command
 
 
 def solve(commands: list[str]) -> int:
