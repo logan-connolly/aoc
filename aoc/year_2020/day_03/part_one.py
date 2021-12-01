@@ -1,9 +1,7 @@
-def solve(tmap, down, right):
+from aoc.year_2020.day_03 import move
+
+
+def solve(data):
     """Day 3: Toboggan Trajectory (part 1)"""
-    row_index = 0
-    tree_count = 0
-    for row in tmap[down::down]:
-        row_index += right
-        if row[row_index % len(row)] == "#":
-            tree_count += 1
-    return tree_count
+    down, right = (1, 3)
+    return move.shift(data, down, right)

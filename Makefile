@@ -6,6 +6,9 @@ bootstrap: # Install necessary dependencies to run cli
 run: # Run script for given year and [optional] day
 	poetry run python -m aoc $(year) $(day)
 
+new: # Make new day entry for a given year and day
+	bash ./scripts/generate_day.sh $(year) $(day)
+
 test: # Run tests and coverage
 	poetry run mypy aoc
 	poetry run coverage run -m pytest tests
