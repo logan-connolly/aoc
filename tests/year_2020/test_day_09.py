@@ -1,3 +1,5 @@
+import pytest
+
 from aoc.year_2020.day_09 import part_one, part_two
 from aoc.year_2020.resources import read_input
 
@@ -10,3 +12,8 @@ def test_part_one():
 
 def test_part_two():
     assert part_two.solve(NUMS, preamble=25) == 31580383
+
+
+def test_raises_error_when_answer_not_found():
+    with pytest.raises(ValueError):
+        part_two.solve([1, 2, 3, 4, 5, 6, 7], preamble=2)
