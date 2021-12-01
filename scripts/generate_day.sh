@@ -2,6 +2,7 @@
 
 YEAR=$1
 DAY=$2
+
 SRC_PATH=aoc/year_${YEAR}/day_${DAY}
 RESOURCES=aoc/year_${YEAR}/resources
 TEST_PATH=aoc/tests/year_${YEAR}

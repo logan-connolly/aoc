@@ -1,7 +1,7 @@
+from aoc.io import read_input
 from aoc.year_2020.day_01 import part_one, part_two
-from aoc.year_2020.resources import read_input
 
-NUMS = read_input(day=1, as_int=True)
+NUMS = read_input(year=2020, day=1, as_int=True)
 
 
 def test_part_one():

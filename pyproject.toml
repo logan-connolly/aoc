@@ -31,6 +31,7 @@ ignore_missing_imports = true
 
 [tool.coverage.run]
 source = ["aoc/"]
+omit = ["aoc/__main__.py"]
 
 [tool.coverage.report]
 skip_covered = true

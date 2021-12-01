@@ -1,7 +1,7 @@
+from aoc.io import read_input
 from aoc.year_2020.day_03 import part_one, part_two
-from aoc.year_2020.resources import read_input
 
-TMAP = read_input(day=3)
+TMAP = read_input(year=2020, day=3)
 
 
 def test_part_one():
