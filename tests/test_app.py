@@ -1,4 +1,5 @@
 import pytest
+
 from aoc.app import get_solutions, parse_args
 
 DAY = "3"

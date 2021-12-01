@@ -1,5 +1,5 @@
-from .parse import parse_command
 from .accumulate import loop_accumulate
+from .parse import parse_command
 
 
 def solve(commands: list[str]) -> int:

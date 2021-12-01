@@ -1,4 +1,5 @@
 from typing import List, Set, Tuple
+
 from .parse import Cmd
 
 Result = Tuple[int, int]
