@@ -11,26 +11,27 @@
 
 Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. I chose to use python and to package the solutions into the `aoc` python package.
 
-# Install package
+# Requirements
 
-Make sure you have [poetry](https://python-poetry.org/) installed on your system.
+Make sure you have `python>=3.9` as well as [poetry](https://python-poetry.org/) installed on your Unix system.
 
-Then you can run `$ poetry install` in the project root to install all dependencies.
+# Usage
 
-# Get solutions
+This project uses a Makefile to organize common commands
 
-Once you have everything installed, you can launch interactive shell with `$ poetry shell`. Once shell is activated, you can retrieve answers to questions using the following syntax:
+```shell
+# Get help
+make
 
-```python
-# To get individual day
-$ python -m aoc -y 2020 -d 1
+# Install deps for aoc
+make bootstrap
 
-# To get all results for year
-$ python -m aoc -y 2020
-```
+# Run tests
+make test
 
-You can also run all the unit tests by running:
+# Get solutions for a given year
+make run year=2020
 
-```python
-$ pytest aoc
+# Get solutions for a given day
+make run year=2020 day=1
 ```
