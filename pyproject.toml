@@ -1,19 +1,39 @@
 [tool.poetry]
 name = "aoc"
-version = "0.1.0"
-description = "Advent of Code 2020"
+version = "0.2.0"
+description = "Advent of Code Solutions"
 authors = ["Logan Connolly <logan.connolly@protonmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.1.2"
-ipython = "^7.19.0"
-coverage = "^5.3"
+pytest = "^6.2.5"
+coverage = {extras = ["toml"], version = "^6.2"}
 pre-commit = "^2.9.2"
+mypy = "^0.910"
 
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
+
+[tool.black]
+target-version = ['py38']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["aoc/"]
+
+[tool.coverage.report]
+skip_covered = true
+show_missing = true
+ignore_errors = true
+fail_under = 100
