@@ -1,14 +1,11 @@
 import argparse
-import importlib
+from pathlib import Path
 
-from jinja2 import Environment, PackageLoader, select_autoescape
-
-from aoc import db, io, runner
-
-templates = Environment(loader=PackageLoader("aoc"), autoescape=select_autoescape())
+from aoc import io, runner
+from aoc.abstracts.solver import Answers
 
 
-def parse_args(args):
+def parse_args(args: list[str]) -> argparse.Namespace:
     """Parse command line arguments from user"""
     parser = argparse.ArgumentParser()
     parser.add_argument("year", type=int, help="Which year to fetch solution from")
@@ -17,33 +14,25 @@ def parse_args(args):
     return parser.parse_args(args)
 
 
-def create_new_entry(args):
+def create_new_day_entry(year: int, day: int) -> Path:
     """Create necessary files via templating for solving problem"""
-    year, day = args.year, args.day
-    content_one = templates.get_template("part_one.py.j2").render(year=year, day=day)
-    content_two = templates.get_template("part_two.py.j2").render(year=year, day=day)
-    io.generate_files(year, day, "part_one.py", content_one)
-    io.generate_files(year, day, "part_two.py", content_two)
+    io.initialize_data_dir(year, day)
+    io.initialize_module_dir(year, day)
     return io.get_path_to_module(year, day)
 
 
-def get_solutions(args):
+def get_solutions(year: int, day: int) -> Answers:
     """Based on user input, get requested solutions"""
-    base_module_path = f"aoc.year_{args.year}.day_{args.day:02}"
-    try:
-        part_one = importlib.import_module(f"{base_module_path}.part_one")
-        part_two = importlib.import_module(f"{base_module_path}.part_two")
-    except ModuleNotFoundError:
-        raise ValueError(f"Could not load solution for {args.year} {args.day}")
-    input_data = db.data[(args.year, args.day)]
-    return runner.run(input_data, part_one, part_two)
+    solver_module = io.get_solver_module(year, day)
+    raw_input_data = io.read_raw_input(year, day)
+    solver = solver_module.Solver(data=raw_input_data)
+    return runner.run(solver)
 
 
-def display_solutions(solutions, args):
+def display_result(answers: Answers, year: int, day: int) -> None:
     """Pretty print the results"""
-    ans_one, ans_two = solutions
     print()
-    print(f"Year {args.year} Day {args.day}:")
-    print(f"  Part One: {ans_one}")
-    print(f"  Part Two: {ans_two}")
+    print(f"Year {year} Day {day}:")
+    print(f"  Part One: {answers.part_one}")
+    print(f"  Part Two: {answers.part_two}")
     print()

@@ -1,7 +1,12 @@
+import importlib
 from pathlib import Path
-from typing import Optional, Sequence, Union
+from typing import cast
 
-Lines = Sequence[Union[str, int]]
+from jinja2 import Environment, PackageLoader, select_autoescape
+
+from aoc.abstracts.solver import SolverModule
+
+templates = Environment(loader=PackageLoader("aoc"), autoescape=select_autoescape())
 
 
 def get_project_root() -> Path:
@@ -19,31 +24,40 @@ def get_path_to_module(year: int, day: int) -> Path:
     return get_project_root() / "aoc" / f"year_{year}" / f"day_{day:02d}"
 
 
-def read_input(
-    year: int, day: int, delim: Optional[str] = None, as_int: bool = False
-) -> Lines:
+def get_solver_module(year: int, day: int) -> SolverModule:
+    """Load solver module dynamically given year and day"""
+    try:
+        path_to_module = f"aoc.year_{year}.day_{day:02}"
+        module = importlib.import_module(f"{path_to_module}.solver")
+        return cast(SolverModule, module)
+    except ModuleNotFoundError:
+        raise ValueError(f"Could not load solver for {year} {day}")
+
+
+def read_raw_input(year: int, day: int) -> str:
     """Read in input data and transform appropriately"""
     path_to_data = get_path_to_input_data(year, day)
     with path_to_data.open(mode="r") as f:
-        data = f.read()
-
-    lines = data.split(delim) if delim else data.splitlines()
-    item_type = int if as_int else str
-    return [item_type(line) for line in lines]
+        return f.read()
 
 
-def generate_files(year: int, day: int, fname: str, content: str) -> None:
-    """Generate file structure for a new problem in source code"""
+def initialize_data_dir(year: int, day: int) -> None:
+    """Create directory needed for input data"""
     path_to_data = get_path_to_input_data(year, day)
-    path_to_module = get_path_to_module(year, day)
-
     path_to_data.parent.mkdir(parents=True, exist_ok=True)
+    path_to_data.touch()
+
+
+def initialize_module_dir(year: int, day: int) -> None:
+    """Create directory needed for solution module render Solver template"""
+    path_to_module = get_path_to_module(year, day)
     path_to_module.mkdir(parents=True, exist_ok=True)
 
     init_file = path_to_module / "__init__.py"
-    submodule = path_to_module / fname
+    submodule = path_to_module / "solver.py"
+
+    content = templates.get_template("solver.py.j2").render(year=year, day=day)
     if not submodule.exists():
-        path_to_data.touch()
         init_file.touch()
         submodule.touch()
         submodule.write_text(content)
