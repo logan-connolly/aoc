@@ -37,7 +37,7 @@ def generate_files(year: int, day: int, fname: str, content: str) -> None:
     path_to_data = get_path_to_input_data(year, day)
     path_to_module = get_path_to_module(year, day)
 
-    path_to_data.mkdir(parents=True, exist_ok=True)
+    path_to_data.parent.mkdir(parents=True, exist_ok=True)
     path_to_module.mkdir(parents=True, exist_ok=True)
 
     init_file = path_to_module / "__init__.py"
