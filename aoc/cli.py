@@ -5,6 +5,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 from aoc import runner
 from aoc.db import data
+from aoc.io import generate_files
 
 templates = Environment(loader=PackageLoader("aoc"), autoescape=select_autoescape())
 
@@ -14,7 +15,17 @@ def parse_args(args):
     parser = argparse.ArgumentParser()
     parser.add_argument("year", type=int, help="Which year to fetch solution from")
     parser.add_argument("day", type=int, help="Which day of Advent")
+    parser.add_argument("--new", dest="new", action="store_true", help="Create entry")
     return parser.parse_args(args)
+
+
+def create_new_entry(args):
+    """Create necessary files via templating for solving problem"""
+    year, day = args.year, args.day
+    content_one = templates.get_template("part_one.py.j2").render(year=year, day=day)
+    content_two = templates.get_template("part_two.py.j2").render(year=year, day=day)
+    generate_files(year, day, "part_one.py", content_one)
+    generate_files(year, day, "part_two.py", content_two)
 
 
 def get_solutions(args):
@@ -25,7 +36,8 @@ def get_solutions(args):
         part_two = importlib.import_module(f"{base_module_path}.part_two")
     except ModuleNotFoundError:
         raise ValueError(f"Could not load solution for {args.year} {args.day}")
-    return runner.run(data[(args.year, args.day)], part_one, part_two)
+    input_data = data[(args.year, args.day)]
+    return runner.run(input_data, part_one, part_two)
 
 
 def display_solutions(solutions, args):
