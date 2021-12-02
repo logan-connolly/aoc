@@ -9,4 +9,5 @@ data = {
     (2020, 6): read_input(year=2020, day=6, delim="\n\n"),
     (2020, 8): read_input(year=2020, day=8),
     (2020, 9): read_input(year=2020, day=9, as_int=True),
+    (2021, 1): read_input(year=2021, day=1, as_int=True),
 }
