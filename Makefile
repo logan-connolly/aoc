@@ -10,9 +10,9 @@ new: # Run generate module for new day based on templates
 	poetry run python -m aoc $(year) $(day) --new
 
 test: # Run tests and coverage
-	poetry run mypy aoc
 	poetry run coverage run -m pytest tests
 	poetry run coverage report --skip-covered
+	poetry run mypy aoc
 
 clean: # Clean up cached files
 	@find . -type f -name "*.py[co]" -delete
