@@ -10,28 +10,28 @@ Mapping = dict[int, int]
 def build_index_map(lines: StrLines) -> Mapping:
     """Build up mapping for index and value (0 => -1, 1 => 1)"""
     mapping: Mapping = defaultdict(int)
-    for line in lines:
-        for idx, num in enumerate(line):
-            shift_val = -1 if num == "0" else 1
+    for str_byte in lines:
+        for idx, bit in enumerate(str_byte):
+            shift_val = -1 if bit == "0" else 1
             mapping[idx] += shift_val
     return mapping
 
 
-def convert_to_int(str_binary: str) -> int:
-    """Take string representation of binary number and convert to int"""
-    return int(str_binary, 2)
+def convert_to_int(str_byte: str) -> int:
+    """Take string representation of byte and convert to int"""
+    return int(str_byte, 2)
 
 
 def get_gamma_rate(mapping: Mapping) -> int:
-    """Convert mapping to binary string and then return int representation of gamma"""
-    str_binary = "".join("1" if v > 0 else "0" for v in mapping.values())
-    return convert_to_int(str_binary)
+    """Convert mapping to byte and then return int representation of gamma"""
+    str_byte = "".join("1" if v > 0 else "0" for v in mapping.values())
+    return convert_to_int(str_byte)
 
 
 def get_epsilon_rate(mapping: Mapping) -> int:
-    """Convert mapping to binary string and then return int representation of epsilon"""
-    str_binary = "".join("1" if v < 0 else "0" for v in mapping.values())
-    return convert_to_int(str_binary)
+    """Convert mapping to byte and then return int representation of epsilon"""
+    str_byte = "".join("1" if v < 0 else "0" for v in mapping.values())
+    return convert_to_int(str_byte)
 
 
 def get_char_to_filter_by(shift_val: int, is_o2: bool = False) -> str:
@@ -61,8 +61,8 @@ def get_rating(lines: StrLines, is_o2: bool = False) -> int:
         eligible_lines &= filtered_lines
         current_map = build_index_map(list(eligible_lines))
 
-    str_binary = eligible_lines.pop()
-    return convert_to_int(str_binary)
+    str_byte = eligible_lines.pop()
+    return convert_to_int(str_byte)
 
 
 class Solver:
