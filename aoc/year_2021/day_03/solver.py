@@ -41,28 +41,22 @@ def get_char_to_filter_by(shift_val: int, is_o2: bool = False) -> str:
     return "0" if shift_val >= 0 else "1"
 
 
-def filter_lines_by_char(lines: StrLines, target_char: str, idx: int) -> set[str]:
+def filter_lines_by_char(lines: StrLines, target_char: str, idx: int) -> StrLines:
     """Filter out the lines based on whether the index matches target character"""
-    return {line for line in lines if line[idx] == target_char}
+    return [line for line in lines if line[idx] == target_char]
 
 
-def get_rating(lines: StrLines, is_o2: bool = False) -> int:
+def get_rating(lines: StrLines, idx: int = 0, is_o2: bool = False) -> int:
     """Filter out lines that do not meet conditions and return remaining value"""
+
+    if len(lines) == 1:
+        str_byte = lines[0]
+        return convert_to_int(str_byte)
+
     current_map = build_index_map(lines)
-    eligible_lines = set(lines)
-
-    for idx in current_map:
-
-        if len(eligible_lines) == 1:
-            break
-
-        target_char = get_char_to_filter_by(shift_val=current_map[idx], is_o2=is_o2)
-        filtered_lines = filter_lines_by_char(lines, target_char, idx)
-        eligible_lines &= filtered_lines
-        current_map = build_index_map(list(eligible_lines))
-
-    str_byte = eligible_lines.pop()
-    return convert_to_int(str_byte)
+    target_char = get_char_to_filter_by(shift_val=current_map[idx], is_o2=is_o2)
+    filtered_lines = filter_lines_by_char(lines, target_char, idx)
+    return get_rating(filtered_lines, idx + 1, is_o2)
 
 
 class Solver:
