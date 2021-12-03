@@ -1,3 +1,5 @@
+"""This is the Solution for Year 2020 Day 01"""
+
 from typing import Optional
 
 from aoc.abstracts.solver import Answers, IntLines

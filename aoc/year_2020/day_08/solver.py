@@ -1,3 +1,5 @@
+"""This is the Solution for Year 2020 Day 08"""
+
 import copy
 
 from aoc.abstracts.solver import Answers, StrLines

@@ -1,3 +1,5 @@
+"""This is the Solution for Year 2020 Day 02"""
+
 from dataclasses import dataclass, field
 
 from aoc.abstracts.solver import Answers, StrLines

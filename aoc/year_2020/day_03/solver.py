@@ -1,3 +1,5 @@
+"""This is the Solution for Year 2020 Day 03"""
+
 from copy import deepcopy
 from math import prod
 
