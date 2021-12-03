@@ -7,6 +7,7 @@ from aoc.cli import get_solutions
     "year,day,expected_one,expected_two",
     [
         (2021, 1, 1374, 1418),
+        (2021, 2, 150, 900),
     ],
 )
 def test_solutions(year, day, expected_one, expected_two):
