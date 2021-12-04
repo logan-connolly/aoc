@@ -1,17 +1,18 @@
 import argparse
 from pathlib import Path
+from typing import Optional, Sequence
 
 from aoc import io, runner
 from aoc.abstracts.solver import Answers
 
 
-def parse_args(args: list[str]) -> argparse.Namespace:
+def parse_args(argv: Optional[Sequence[str]]) -> argparse.Namespace:
     """Parse command line arguments from user"""
     parser = argparse.ArgumentParser()
     parser.add_argument("year", type=int, help="Which year to fetch solution from")
     parser.add_argument("day", type=int, help="Which day of Advent")
     parser.add_argument("--new", dest="new", action="store_true", help="Create entry")
-    return parser.parse_args(args)
+    return parser.parse_args(argv)
 
 
 def create_new_day_entry(year: int, day: int) -> Path:
