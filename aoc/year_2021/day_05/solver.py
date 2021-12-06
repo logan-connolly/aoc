@@ -13,9 +13,6 @@ class Point:
     x: int
     y: int
 
-    def __repr__(self) -> str:
-        return f"({self.x}, {self.y})"
-
 
 @dataclass
 class Line:
@@ -24,8 +21,13 @@ class Line:
     start: Point
     end: Point
 
-    def __repr__(self) -> str:
-        return f"{self.start} -> {self.end}"
+    @property
+    def slope(self) -> int:
+        return int((self.start.y - self.end.y) / (self.start.x - self.end.x))
+
+    @property
+    def intercept(self) -> int:
+        return int(self.start.y - (self.start.x * self.slope))
 
     def is_vertical(self) -> bool:
         return self.start.x == self.end.x
@@ -33,18 +35,7 @@ class Line:
     def is_horizontal(self) -> bool:
         return self.start.y == self.end.y
 
-    @property
-    def slope(self) -> int:
-        try:
-            return int((self.start.y - self.end.y) / (self.start.x - self.end.x))
-        except ZeroDivisionError:
-            return 0
-
-    @property
-    def intercept(self) -> int:
-        return int(self.start.y - (self.start.x * self.slope))
-
-    def get_y(self, x_val: int) -> int:
+    def get_y_val(self, x_val: int) -> int:
         return int(self.slope * x_val + self.intercept)
 
 
@@ -71,27 +62,27 @@ def get_horizontal_vertical_lines(lines: list[Line]) -> list[Line]:
     return [line for line in lines if line.is_horizontal() or line.is_vertical()]
 
 
-def get_points(line: Line) -> list[Point]:
+def get_point_segment(line: Line) -> list[Point]:
     """Get a list of points in a given line"""
     if line.is_vertical():
         if line.start.y < line.end.y:
             range_val = range(line.start.y, line.end.y + 1)
         else:
             range_val = range(line.end.y, line.start.y + 1)
-        return [Point(x=line.start.x, y=n) for n in range_val]
+        return [Point(x=line.start.x, y=_y) for _y in range_val]
 
     if line.start.x < line.end.x:
         range_val = range(line.start.x, line.end.x + 1)
     else:
         range_val = range(line.end.x, line.start.x + 1)
-    return [Point(x=n, y=line.get_y(n)) for n in range_val]
+    return [Point(x=_x, y=line.get_y_val(_x)) for _x in range_val]
 
 
-def count_points(lines: list[Line]) -> dict[Point, int]:
+def get_point_occurences(lines: list[Line]) -> dict[Point, int]:
     """Count up the number of occurences for a given point"""
     counter: dict[Point, int] = defaultdict(int)
     for line in lines:
-        points = get_points(line)
+        points = get_point_segment(line)
         for point in points:
             counter[point] += 1
     return counter
@@ -107,12 +98,12 @@ class Solver:
     def _solve_part_one(self, lines: StrLines) -> int:
         parsed_lines = parse_lines(lines)
         filtered_lines = get_horizontal_vertical_lines(parsed_lines)
-        point_count = count_points(filtered_lines)
+        point_count = get_point_occurences(filtered_lines)
         return sum(1 for n_occurences in point_count.values() if n_occurences >= 2)
 
     def _solve_part_two(self, lines: StrLines) -> int:
         parsed_lines = parse_lines(lines)
-        point_count = count_points(parsed_lines)
+        point_count = get_point_occurences(parsed_lines)
         return sum(1 for n_occurences in point_count.values() if n_occurences >= 2)
 
     def solve(self) -> Answers:
