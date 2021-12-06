@@ -8,12 +8,11 @@ from aoc.abstracts.solver import Answers, IntLines
 @lru_cache
 def count_offspring(cycle: int, days: int) -> int:
     """Counts how many offspring will be spawn over a given period"""
-    if cycle > days or cycle == days:
+    if cycle >= days:
         return 1
-    elif cycle == 0:
+    if cycle == 0:
         return count_offspring(8, days - 1) + count_offspring(6, days - 1)
-    else:
-        return count_offspring(cycle - 1, days - 1)
+    return count_offspring(cycle - 1, days - 1)
 
 
 class Solver:
