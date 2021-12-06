@@ -9,7 +9,7 @@ from aoc.cli import get_solutions
         (2021, 1, 1374, 1418),
         (2021, 2, 1692075, 1749524700),
         (2021, 3, 4191876, 3414905),
-        (2021, 4, 21607, 19012),
+        (2021, 4, 4512, 1924),
     ],
 )
 def test_solutions(year, day, expected_one, expected_two):
