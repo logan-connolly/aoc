@@ -37,9 +37,11 @@ disallow_incomplete_defs = true
 
 [tool.coverage.run]
 source = ["aoc/"]
-omit = ["aoc/__main__.py", "aoc/abstracts/*"]
+omit = ["aoc/__main__.py", '*.j2']
 
 [tool.coverage.report]
 skip_covered = true
 show_missing = true
 ignore_errors = true
+fail_under = 100
+exclude_lines = ['def __repr__', 'class .*\bProtocol\):']

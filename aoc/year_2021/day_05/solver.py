@@ -1,6 +1,7 @@
 """This is the Solution for Year 2021 Day 05"""
 
-from collections import defaultdict
+import itertools
+from collections import Counter
 from dataclasses import dataclass
 
 from aoc.abstracts.solver import Answers, StrLines
@@ -15,7 +16,7 @@ class Point:
 
 
 @dataclass
-class Line:
+class LineSegment:
     """Define a line object that takes a start and end point"""
 
     start: Point
@@ -35,8 +36,16 @@ class Line:
     def is_horizontal(self) -> bool:
         return self.start.y == self.end.y
 
-    def get_y_val(self, x_val: int) -> int:
-        return int(self.slope * x_val + self.intercept)
+    def y_range(self) -> range:
+        coords = self.start.y, self.end.y
+        return range(min(coords), max(coords) + 1)
+
+    def x_range(self) -> range:
+        coords = self.start.x, self.end.x
+        return range(min(coords), max(coords) + 1)
+
+    def calculate_y(self, x: int) -> int:
+        return int(self.slope * x + self.intercept)
 
 
 def parse_point(raw_point: str) -> Point:
@@ -45,47 +54,34 @@ def parse_point(raw_point: str) -> Point:
     return Point(x=int(x), y=int(y))
 
 
-def parse_lines(lines: StrLines) -> list[Line]:
+def parse_lines(lines: StrLines) -> list[LineSegment]:
     """Parse raw lines into Lines and Points"""
     parsed_lines = []
     for raw_line in lines:
         raw_start, raw_end = raw_line.split(" -> ")
         start_point = parse_point(raw_start)
         end_point = parse_point(raw_end)
-        line = Line(start=start_point, end=end_point)
+        line = LineSegment(start=start_point, end=end_point)
         parsed_lines.append(line)
     return parsed_lines
 
 
-def get_horizontal_vertical_lines(lines: list[Line]) -> list[Line]:
+def get_horizontal_vertical_lines(lines: list[LineSegment]) -> list[LineSegment]:
     """Filter for only horizontal or vertical lines"""
     return [line for line in lines if line.is_horizontal() or line.is_vertical()]
 
 
-def get_point_segment(line: Line) -> list[Point]:
+def get_point_segment(line: LineSegment) -> list[Point]:
     """Get a list of points in a given line"""
     if line.is_vertical():
-        if line.start.y < line.end.y:
-            range_val = range(line.start.y, line.end.y + 1)
-        else:
-            range_val = range(line.end.y, line.start.y + 1)
-        return [Point(x=line.start.x, y=_y) for _y in range_val]
-
-    if line.start.x < line.end.x:
-        range_val = range(line.start.x, line.end.x + 1)
-    else:
-        range_val = range(line.end.x, line.start.x + 1)
-    return [Point(x=_x, y=line.get_y_val(_x)) for _x in range_val]
+        return [Point(x=line.start.x, y=y) for y in line.y_range()]
+    return [Point(x=x, y=line.calculate_y(x)) for x in line.x_range()]
 
 
-def get_point_occurences(lines: list[Line]) -> dict[Point, int]:
+def get_point_occurences(lines: list[LineSegment]) -> dict[Point, int]:
     """Count up the number of occurences for a given point"""
-    counter: dict[Point, int] = defaultdict(int)
-    for line in lines:
-        points = get_point_segment(line)
-        for point in points:
-            counter[point] += 1
-    return counter
+    segment_points = (get_point_segment(line) for line in lines)
+    return Counter(itertools.chain.from_iterable(segment_points))
 
 
 class Solver:
