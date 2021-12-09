@@ -41,15 +41,14 @@ def decode_line(signals: str) -> int:
 
         # when len=5 => 2|3|5,
         if n_characters == 5:
-            # 3 is only len=5 digit that shares all chars with 1
+            # character intersection of 3 and 1 == 1
             if character_set & digit_character_set[1] == digit_character_set[1]:
                 digit_character_set[3] = character_set
+            # character union of 2 and 4 == 8
+            elif character_set | digit_character_set[4] == digit_character_set[8]:
+                digit_character_set[2] = character_set
             else:
-                # character union of 2 and 4 == 8
-                if character_set | digit_character_set[4] == digit_character_set[8]:
-                    digit_character_set[2] = character_set
-                else:
-                    digit_character_set[5] = character_set
+                digit_character_set[5] = character_set
 
         # len=6 => 0|6|9
         elif n_characters == 6:
