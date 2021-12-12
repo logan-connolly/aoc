@@ -1,6 +1,7 @@
 """This is the Solution for Year 2021 Day 09"""
 
 from collections import defaultdict
+
 from aoc.abstracts.solver import Answers, StrLines
 
 Coord = tuple[int, int]

@@ -2,7 +2,6 @@
 
 from aoc.abstracts.solver import Answers, StrLines
 
-
 BRACKET_MAP = {"[": "]", "(": ")", "<": ">", "{": "}"}
 
 
