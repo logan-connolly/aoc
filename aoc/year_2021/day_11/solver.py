@@ -21,12 +21,7 @@ def build_octopus_map(lines: StrLines) -> OctopusMap:
 
 def increment_energy_level(octopus_map: OctopusMap) -> OctopusMap:
     """Increment each octopus by one energy level"""
-    om = deepcopy(octopus_map)
-    for row_idx in range(10):
-        for col_idx in range(10):
-            idx = (row_idx, col_idx)
-            om[idx] = om[idx] + 1
-    return om
+    return {idx: energy_level + 1 for idx, energy_level in octopus_map.items()}
 
 
 def get_adjacents(row: int, col: int) -> AdjacentIndexes:
