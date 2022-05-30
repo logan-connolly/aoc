@@ -23,6 +23,7 @@ def test_solutions_can_be_displayed(year, day):
     cli.display_result(solutions, year, day)
 
 
-def test_create_new_entry(year, day, mock_project_root):
+@pytest.mark.usefixtures("mock_project_root")
+def test_create_new_entry(year, day):
     module_path = cli.create_new_day_entry(year, day)
     assert module_path.exists()
