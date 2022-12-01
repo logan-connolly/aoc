@@ -63,6 +63,7 @@ func rankTotals(t []int) []int {
 	return t
 }
 
+// TODO: move to utility package
 // CastToInt is a helper function for casting string values
 // to base 10 integers.
 func CastToInt(s string) int {
@@ -73,6 +74,7 @@ func CastToInt(s string) int {
 	return number
 }
 
+// TODO: move to utility package
 // ReadInputAsString is a helper function for reading in the
 // problem input and converting it to string.
 func ReadInputAsString() string {
