@@ -10,34 +10,35 @@ import (
 )
 
 func main() {
-	p1 := partOne()
-	p2 := partTwo()
+	data := preprocessInput()
+	p1 := partOne(data)
+	p2 := partTwo(data)
 
 	fmt.Printf("Solutions(p1=%d, p2=%d)", p1, p2)
 }
 
-func partOne() int {
-	data := ReadInputAsString()
-	elfItems := strings.Split(data, "\n\n")
-
-	CalorieTotals := calculateNestedTotals(elfItems)
-	rankedCalorieTotals := rankTotals(CalorieTotals)
+func partOne(data []string) int {
+	calorieTotals := calculateNestedTotals(data)
+	rankedCalorieTotals := rankTotals(calorieTotals)
 
 	return rankedCalorieTotals[0]
 }
 
-func partTwo() int {
-	data := ReadInputAsString()
-	elfItems := strings.Split(data, "\n\n")
-
-	calorieTotals := calculateNestedTotals(elfItems)
+func partTwo(data []string) int {
+	calorieTotals := calculateNestedTotals(data)
 	rankedCalorieTotals := rankTotals(calorieTotals)
 
 	var topThreeCombined int
 	for _, total := range rankedCalorieTotals[:3] {
 		topThreeCombined += total
 	}
+
 	return topThreeCombined
+}
+
+func preprocessInput() []string {
+	data := ReadInputAsString()
+	return strings.Split(data, "\n\n")
 }
 
 func calculateNestedTotals(items []string) []int {
