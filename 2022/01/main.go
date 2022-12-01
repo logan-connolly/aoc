@@ -19,17 +19,17 @@ func main() {
 
 func partOne(data []string) int {
 	calorieTotals := calculateNestedTotals(data)
-	rankedCalorieTotals := rankTotals(calorieTotals)
+	rankSortTotals(&calorieTotals)
 
-	return rankedCalorieTotals[0]
+	return calorieTotals[0]
 }
 
 func partTwo(data []string) int {
 	calorieTotals := calculateNestedTotals(data)
-	rankedCalorieTotals := rankTotals(calorieTotals)
+	rankSortTotals(&calorieTotals)
 
 	var topThreeCombined int
-	for _, total := range rankedCalorieTotals[:3] {
+	for _, total := range calorieTotals[:3] {
 		topThreeCombined += total
 	}
 
@@ -57,11 +57,8 @@ func calculateNestedTotals(items []string) []int {
 	return totals
 }
 
-func rankTotals(t []int) []int {
-	sort.Slice(t, func(i, j int) bool {
-		return t[i] > t[j]
-	})
-	return t
+func rankSortTotals(t *[]int) {
+	sort.Sort(sort.Reverse(sort.IntSlice(*t)))
 }
 
 // TODO: move to utility package
