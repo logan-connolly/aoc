@@ -1,8 +1,8 @@
 # 🎄 Advent of Code (aoc)
 
-[![tests](https://github.com/logan-connolly/aoc/actions/workflows/test.yaml/badge.svg)](https://github.com/logan-connolly/aoc/actions)
+[![lint](https://github.com/logan-connolly/aoc/actions/workflows/lint.yaml/badge.svg)](https://github.com/logan-connolly/aoc/actions)
 
-Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. I chose to use python and to package the solutions into the `aoc` python package.
+Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like.
 
 # Requirements
 
@@ -15,13 +15,4 @@ This project uses a Makefile to organize common commands like the following:
 ```shell
 # Get help
 make
-
-# Install deps for aoc
-make bootstrap
-
-# Run tests
-make test
-
-# Get solutions for a given day
-make run year=2020 day=1
 ```
