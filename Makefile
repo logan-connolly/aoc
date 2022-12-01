@@ -11,6 +11,9 @@ help: # Show this help
 	@grep -h '\s#\s' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?# "}; {printf " \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 	@echo
 
+go-test: # Run the tests for each solution
+	@go test ./...
+
 py-bootstrap: # Install necessary python dependencies to run cli
 	@poetry install
 
