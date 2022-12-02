@@ -29,8 +29,8 @@ func partOne(lines []string) int {
 	var scores []int
 	for _, rawRoundInput := range lines {
 		rawOther, rawSelf := getRawSigns(rawRoundInput)
-		other := ActionInfoMap[rawOther]
-		self := getActionInfoFromEncryption(rawSelf)
+		other := ActionMap[rawOther]
+		self := getActionFromEncryption(rawSelf)
 
 		round := NewRound(other, self)
 		scores = append(scores, round.GetScore())
@@ -43,8 +43,8 @@ func partTwo(lines []string) int {
 	var scores []int
 	for _, rawRoundInput := range lines {
 		rawOther, rawSelf := getRawSigns(rawRoundInput)
-		other := ActionInfoMap[rawOther]
-		self := getActionInfoFromCommand(rawSelf, other)
+		other := ActionMap[rawOther]
+		self := getActionFromCommand(rawSelf, other)
 
 		round := NewRound(other, self)
 		scores = append(scores, round.GetScore())
@@ -58,53 +58,53 @@ func getRawSigns(s string) (string, string) {
 	return rawSigns[0], rawSigns[1]
 }
 
-type ActionInfo struct {
+type Action struct {
 	sign  string
 	beats string
 	loses string
 	value int
 }
 
-var ActionInfoMap = map[string]ActionInfo{
+var ActionMap = map[string]Action{
 	Rock:     {Rock, Scissors, Paper, 1},
 	Paper:    {Paper, Rock, Scissors, 2},
 	Scissors: {Scissors, Paper, Rock, 3},
 }
 
-func getActionInfoFromEncryption(s string) ActionInfo {
+func getActionFromEncryption(s string) Action {
 	switch s {
 	case "X":
-		return ActionInfoMap[Rock]
+		return ActionMap[Rock]
 	case "Y":
-		return ActionInfoMap[Paper]
+		return ActionMap[Paper]
 	case "Z":
-		return ActionInfoMap[Scissors]
+		return ActionMap[Scissors]
 	default:
 		log.Fatal("Did not recognize the encrypted sign provided:", s)
-		return ActionInfo{}
+		return Action{}
 	}
 }
 
-func getActionInfoFromCommand(s string, other ActionInfo) ActionInfo {
+func getActionFromCommand(s string, other Action) Action {
 	switch s {
 	case "X":
-		return ActionInfoMap[other.beats]
+		return ActionMap[other.beats]
 	case "Y":
-		return ActionInfoMap[other.sign]
+		return ActionMap[other.sign]
 	case "Z":
-		return ActionInfoMap[other.loses]
+		return ActionMap[other.loses]
 	default:
 		log.Fatal("Did not recognize the encrypted sign provided:", s)
-		return ActionInfo{}
+		return Action{}
 	}
 }
 
 type Round struct {
-	other ActionInfo
-	self  ActionInfo
+	other Action
+	self  Action
 }
 
-func NewRound(other, self ActionInfo) Round {
+func NewRound(other, self Action) Round {
 	return Round{other, self}
 }
 
