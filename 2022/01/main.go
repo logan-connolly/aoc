@@ -27,16 +27,11 @@ func partTwo(data []string) int {
 	calorieTotals := calculateNestedTotals(data)
 	rankSortTotals(&calorieTotals)
 
-	var topThreeCombined int
-	for _, total := range calorieTotals[:3] {
-		topThreeCombined += total
-	}
-
-	return topThreeCombined
+	return util.SumInts(calorieTotals[:3])
 }
 
 func calculateNestedTotals(items []string) []int {
-	totals := []int{}
+	var totals []int
 	for _, itemString := range items {
 		subItems := strings.Split(itemString, "\n")
 
