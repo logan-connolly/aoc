@@ -2,15 +2,14 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"sort"
-	"strconv"
 	"strings"
+
+	"github.com/logan-connolly/aoc/internal/util"
 )
 
 func main() {
-	data := preprocessInput()
+	data := util.ReadInputAsStringLines("\n\n")
 	p1 := partOne(data)
 	p2 := partTwo(data)
 
@@ -36,11 +35,6 @@ func partTwo(data []string) int {
 	return topThreeCombined
 }
 
-func preprocessInput() []string {
-	data := ReadInputAsString()
-	return strings.Split(data, "\n\n")
-}
-
 func calculateNestedTotals(items []string) []int {
 	totals := []int{}
 	for _, itemString := range items {
@@ -48,7 +42,7 @@ func calculateNestedTotals(items []string) []int {
 
 		var total int
 		for _, subItemString := range subItems {
-			total += CastToInt(subItemString)
+			total += util.ToInt(subItemString)
 		}
 
 		totals = append(totals, total)
@@ -59,26 +53,4 @@ func calculateNestedTotals(items []string) []int {
 
 func rankSortTotals(t *[]int) {
 	sort.Sort(sort.Reverse(sort.IntSlice(*t)))
-}
-
-// TODO: move to utility package
-// CastToInt is a helper function for casting string values
-// to base 10 integers.
-func CastToInt(s string) int {
-	number, err := strconv.Atoi(s)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return number
-}
-
-// TODO: move to utility package
-// ReadInputAsString is a helper function for reading in the
-// problem input and converting it to string.
-func ReadInputAsString() string {
-	content, err := os.ReadFile("./input.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	return strings.TrimRight(string(content[:]), "\n")
 }

@@ -1,9 +1,13 @@
 package main
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/logan-connolly/aoc/internal/util"
+)
 
 func Test_partOne(t *testing.T) {
-	data := preprocessInput()
+	data := util.ReadInputAsStringLines("\n\n")
 
 	want := 24000
 	got := partOne(data)
@@ -14,7 +18,7 @@ func Test_partOne(t *testing.T) {
 }
 
 func Test_partTwo(t *testing.T) {
-	data := preprocessInput()
+	data := util.ReadInputAsStringLines("\n\n")
 
 	want := 45000
 	got := partTwo(data)
