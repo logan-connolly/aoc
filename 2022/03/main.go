@@ -18,7 +18,7 @@ func partOne(lines []string) int {
 	var total int
 	for _, line := range lines {
 		s1, s2 := util.Split([]rune(line), 0.5)
-		matches := findMatches(s1, s2)
+		matches := util.FindMatches(s1, s2)
 		total += getPriority(matches[0])
 	}
 	return total
@@ -29,10 +29,10 @@ func partTwo(lines []string) int {
 	for _, g := range makeGroups(lines) {
 		e1, e2, e3 := []rune(g[0]), []rune(g[1]), []rune(g[2])
 
-		e1e2 := findMatches(e1, e2)
-		e1e3 := findMatches(e1, e3)
+		e1e2 := util.FindMatches(e1, e2)
+		e1e3 := util.FindMatches(e1, e3)
 
-		if matches := findMatches(e1e2, e1e3); len(matches) == 1 {
+		if matches := util.FindMatches(e1e2, e1e3); len(matches) == 1 {
 			total += getPriority(matches[0])
 		}
 	}
@@ -56,19 +56,6 @@ func makeGroups(lines []string) [][]string {
 		}
 	}
 	return groups
-}
-
-// findMatches iterates through the two compartments of items
-// and returns the matched item when found.
-func findMatches(s1, s2 []rune) []rune {
-	matchSet := make(map[rune]bool)
-	for _, item := range s1 {
-		_, exists := matchSet[item]
-		if !exists && util.Contains(s2, item) {
-			matchSet[item] = true
-		}
-	}
-	return util.KeysToSlice(matchSet)
 }
 
 // getPriority takes a rune character (rucksack item) and

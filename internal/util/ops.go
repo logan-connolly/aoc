@@ -19,3 +19,21 @@ func Contains[T Comparable](s []T, value T) bool {
 	}
 	return false
 }
+
+// FindMatches iterates through the items in the shorter
+// slice and returns all the matches that it finds.
+func FindMatches[T Comparable](s1, s2 []T) []T {
+	if len(s2) < len(s1) {
+		s1, s2 = s2, s1
+	}
+
+	matchSet := make(map[T]bool)
+	for _, item := range s1 {
+		_, exists := matchSet[item]
+		if !exists && Contains(s2, item) {
+			matchSet[item] = true
+		}
+	}
+
+	return KeysToSlice(matchSet)
+}
