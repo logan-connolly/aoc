@@ -11,7 +11,7 @@ func Split[T any](s []T, ratio float64) ([]T, []T) {
 
 // Contains takes a slice and a value and returns true
 // if it exists, else false.
-func Contains[T Comparable](s []T, value T) bool {
+func Contains[T comparable](s []T, value T) bool {
 	for _, item := range s {
 		if item == value {
 			return true
@@ -22,7 +22,7 @@ func Contains[T Comparable](s []T, value T) bool {
 
 // FindMatches iterates through the items in the shorter
 // slice and returns all the matches that it finds.
-func FindMatches[T Comparable](s1, s2 []T) []T {
+func FindMatches[T comparable](s1, s2 []T) []T {
 	if len(s2) < len(s1) {
 		s1, s2 = s2, s1
 	}

@@ -16,7 +16,7 @@ func ToInt(s string) int {
 }
 
 // KeysToSlice converts map keys into a slice.
-func KeysToSlice[K Comparable, V any](m map[K]V) []K {
+func KeysToSlice[K comparable, V any](m map[K]V) []K {
 	keys := make([]K, 0, len(m))
 	for k := range m {
 		keys = append(keys, k)
