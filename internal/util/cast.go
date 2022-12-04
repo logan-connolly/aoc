@@ -15,6 +15,15 @@ func ToInt(s string) int {
 	return number
 }
 
+// ToSet takes a slice as input and outputs a set.
+func ToSet[T comparable](s []T) map[T]bool {
+	setMap := make(map[T]bool)
+	for _, item := range s {
+		setMap[item] = true
+	}
+	return setMap
+}
+
 // KeysToSlice converts map keys into a slice.
 func KeysToSlice[K comparable, V any](m map[K]V) []K {
 	keys := make([]K, 0, len(m))
