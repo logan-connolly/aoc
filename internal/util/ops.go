@@ -37,3 +37,10 @@ func FindMatches[T comparable](s1, s2 []T) []T {
 
 	return KeysToSlice(matchSet)
 }
+
+// Reverse flip the order of items in a slice.
+func Reverse[T comparable](input []T) {
+	for i, j := 0, len(input)-1; i < j; i, j = i+1, j-1 {
+		input[i], input[j] = input[j], input[i]
+	}
+}
