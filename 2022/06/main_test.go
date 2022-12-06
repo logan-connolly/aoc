@@ -47,7 +47,7 @@ func Test_solve(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		got := solve(tt.input, 0, tt.marker)
+		got := solve([]rune(tt.input), tt.marker, 0)
 		if got != tt.want {
 			t.Errorf("solve() => got %v, want %v", got, tt.want)
 		}

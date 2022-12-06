@@ -21,19 +21,16 @@ func main() {
 }
 
 func partOne(content string) int {
-	return solve(content, 0, StartOfPacketMarker)
+	return solve([]rune(content), StartOfPacketMarker, 0)
 }
 
 func partTwo(content string) int {
-	return solve(content, 0, StartOfMessageMarker)
+	return solve([]rune(content), StartOfMessageMarker, 0)
 }
 
-func solve(content string, index int, marker int) int {
-	subset := []rune(content[:marker])
-
-	if len(subset) == len(util.ToSet(subset)) {
-		return index + marker
+func solve(chars []rune, marker, index int) int {
+	if len(chars[:marker]) == len(util.ToSet(chars[:marker])) {
+		return marker + index
 	}
-
-	return solve(content[1:], index+1, marker)
+	return solve(chars[1:], marker, index+1)
 }
