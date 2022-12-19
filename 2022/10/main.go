@@ -10,10 +10,8 @@ import (
 func main() {
 	lines := util.ReadInputAsStringLines("\n")
 
-	p1 := partOne(lines)
-	p2 := partTwo(lines)
-
-	fmt.Printf("Solutions(p1=%d, p2=%d)", p1, p2)
+	fmt.Printf("Solutions(p1=%d)\n", partOne(lines))
+	partTwo(lines)
 }
 
 func partOne(lines []string) int {
@@ -21,9 +19,9 @@ func partOne(lines []string) int {
 	return getSignalStrength(outputs)
 }
 
-func partTwo(lines []string) int {
-	// TODO: not completed
-	return -1
+func partTwo(lines []string) {
+	outputs := getStrengthOutputs(lines)
+	displayLetters(outputs)
 }
 
 func getStrengthOutputs(lines []string) (outputs []int) {
@@ -47,6 +45,28 @@ func getSignalStrength(outputs []int) (signal int) {
 			signal += cycle * op
 		default:
 			continue
+		}
+	}
+	return signal
+}
+
+func getCharacter(idx, output int) string {
+	switch idx - output {
+	case -1, 0, 1:
+		return "#"
+	default:
+		return "."
+	}
+}
+
+func displayLetters(outputs []int) (signal int) {
+	for idx, output := range outputs {
+		char := getCharacter(idx%40, output)
+		switch (idx + 1) % 40 {
+		case 0:
+			fmt.Println(char)
+		default:
+			fmt.Print(char)
 		}
 	}
 	return signal
