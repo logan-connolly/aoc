@@ -1,8 +1,6 @@
 # 🎄 Advent of Code (aoc)
 
-[![lint](https://github.com/logan-connolly/aoc/actions/workflows/lint.yaml/badge.svg)](https://github.com/logan-connolly/aoc/actions)
-
-Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like.
+[Advent of Code](https://adventofcode.com/) is a collection of small programming puzzles released each Christmas.
 
 # Usage
 
